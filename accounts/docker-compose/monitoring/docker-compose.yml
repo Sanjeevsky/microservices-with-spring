@@ -32,7 +32,7 @@ services:
      - eazybank
 
   configserver:
-    image: eazybytes/configserver:latest
+    image: sanjeevsky/configserver:latest
     mem_limit: 700m
     ports:
       - "8071:8071"
@@ -45,7 +45,7 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       
   eurekaserver:
-    image: eazybytes/eurekaserver:latest
+    image: sanjeevsky/eurekaserver:latest
     mem_limit: 700m
     ports:
       - "8070:8070"
@@ -65,7 +65,7 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
 
   accounts:
-    image: eazybytes/accounts:latest
+    image: sanjeevsky/accounts:latest
     mem_limit: 700m
     ports:
       - "8080:8080"
@@ -87,7 +87,7 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
   
   loans:
-    image: eazybytes/loans:latest
+    image: sanjeevsky/loans:latest
     mem_limit: 700m
     ports:
       - "8090:8090"
@@ -109,7 +109,7 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
     
   cards:
-    image: eazybytes/cards:latest
+    image: sanjeevsky/cards:latest
     mem_limit: 700m
     ports:
       - "9000:9000"
@@ -131,7 +131,7 @@ services:
       SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       
   gatewayserver:
-    image: eazybytes/gatewayserver:latest
+    image: sanjeevsky/gatewayserver:latest
     mem_limit: 700m
     ports:
       - "8072:8072"
