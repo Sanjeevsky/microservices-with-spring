@@ -5,7 +5,8 @@ services:
   grafana:
     image: "grafana/grafana:latest"
     ports:
-      - "3000:3000"
+      - "4000:3000"
+    restart: on-failure
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password
@@ -16,6 +17,7 @@ services:
 
   prometheus:
    image: prom/prometheus:latest
+   restart: on-failure
    ports:
       - "9090:9090"
    volumes:
@@ -25,6 +27,7 @@ services:
    
   zipkin:
     image: openzipkin/zipkin
+    restart: on-failure
     mem_limit: 700m
     ports:
       - "9411:9411"
@@ -34,6 +37,7 @@ services:
   configserver:
     image: sanjeevsky/configserver:latest
     mem_limit: 700m
+    restart: on-failure
     ports:
       - "8071:8071"
     networks:
@@ -53,12 +57,7 @@ services:
      - eazybank
     depends_on:
       - configserver
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 15s
-        max_attempts: 3
-        window: 120s
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
@@ -74,12 +73,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 30s
-        max_attempts: 3
-        window: 120s
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
@@ -96,12 +90,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 30s
-        max_attempts: 3
-        window: 120s
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
@@ -118,12 +107,7 @@ services:
     depends_on:
       - configserver
       - eurekaserver
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 30s
-        max_attempts: 3
-        window: 120s
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
@@ -143,12 +127,7 @@ services:
       - cards
       - loans
       - accounts
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 45s
-        max_attempts: 3
-        window: 180s
+    restart: on-failure
     environment:
       SPRING_PROFILES_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
